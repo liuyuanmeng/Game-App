@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import apiClient from '../services/api-client'
 import { Text } from '@chakra-ui/react'
+import axios from 'axios'
+
 
 interface Game {
-  id: number
+  id: string
   name: string
 }
-interface FetchGamesResponse {
-  count: number
-  results: Game[]
-}
+// interface FetchGamesResponse {
+//   // count: number
+//   results: Game[]
+// }
 
 const GameGrid = () => {
   const [games, setGames] = useState<Game[]>([])
@@ -17,10 +19,13 @@ const GameGrid = () => {
 
   useEffect(() => {
     apiClient
-      .get<FetchGamesResponse>('./games')
-      .then((res) => setGames(res.data.results))
+      .get('/breweries')
+      .then((res) => setGames(res.data))
       .catch((err) => setError(err.message))
-  })
+ 
+  }, [])
+
+ 
   return (
     <>
       {error && <Text>{error}</Text>}
