@@ -1,31 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import apiClient from '../services/api-client'
+
 import { Text } from '@chakra-ui/react'
-import axios from 'axios'
+import useGames from '../hooks/useGames'
 
-
-interface Game {
-  id: string
-  name: string
-}
-// interface FetchGamesResponse {
-//   // count: number
-//   results: Game[]
-// }
-
+// Thisis way the code is very crealy 
 const GameGrid = () => {
-  const [games, setGames] = useState<Game[]>([])
-  const [error, setError] = useState('')
+  // we call useGames here and destrucring here to grab games and error
+  const { games, error } = useGames()
 
-  useEffect(() => {
-    apiClient
-      .get('/breweries')
-      .then((res) => setGames(res.data))
-      .catch((err) => setError(err.message))
- 
-  }, [])
-
- 
   return (
     <>
       {error && <Text>{error}</Text>}
