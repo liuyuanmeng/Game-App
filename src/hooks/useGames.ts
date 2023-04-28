@@ -6,6 +6,7 @@ import { CanceledError } from 'axios'
    id: number
    name: string
    background_image: string
+   metacritic: number
  }
  // only strict results to be retuned depending on data structure (array of objects)
  interface FetchGamesResponse {
